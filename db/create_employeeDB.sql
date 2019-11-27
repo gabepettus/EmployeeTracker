@@ -31,7 +31,10 @@ CREATE TABLE employee (
 -- Insert a set of records.
 INSERT INTO department (name) VALUES ("Back Office");
 INSERT INTO department (name) VALUES ("Software");
+INSERT INTO department (name) VALUES ("Support");
 INSERT INTO role (title, salary, dept_id) VALUES ("boss", 100, 1);
 INSERT INTO role (title, salary, dept_id) VALUES ("Pee-on", 10, 2);
+INSERT INTO role (title, salary, dept_id) VALUES ("PeePee-on", 1, 3);
 INSERT INTO employee (first_name, last_name, role_id) VALUES ("Sally", "SideDoor", 1);
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Fredrick", "FrontPoarch", 2, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Buster", "Backdoor", 2, 1);
