@@ -1,0 +1,37 @@
+-- Create the database and specify it for use.
+CREATE DATABASE employeeManagement;
+USE employeeManagement;
+
+-- Create the department table
+
+CREATE TABLE department (
+  id int AUTO_INCREMENT,
+  name varchar(30) NOT NULL,
+  PRIMARY KEY(id)
+);
+-- Create the role table
+CREATE TABLE role (
+  id int AUTO_INCREMENT,
+  title varchar(30) NOT NULL,
+  salary decimal(9.2) NOT NULL,
+  dept_id int NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY (dept_id) REFERENCES department(id)
+);
+-- Create the employee table
+CREATE TABLE employee (
+  id int AUTO_INCREMENT,
+  first_name varchar(30) NOT NULL,
+  last_name varchar(30) NOT NULL,
+  role_id int NOT NULL,
+  manager_id int,
+  PRIMARY KEY(id),
+  FOREIGN KEY (role_id) REFERENCES role(id)
+);
+-- Insert a set of records.
+INSERT INTO department (name) VALUES ("Back Office");
+INSERT INTO department (name) VALUES ("Software");
+INSERT INTO role (title, salary, dept_id) VALUES ("boss", 100, 1);
+INSERT INTO role (title, salary, dept_id) VALUES ("Pee-on", 10, 2);
+INSERT INTO employee (first_name, last_name, role_id) VALUES ("Sally", "SideDoor", 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Fredrick", "FrontPoarch", 2, 1);
