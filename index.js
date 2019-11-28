@@ -50,3 +50,4 @@ async function init() {
 
 init();
 
+module.exports = () => { return init(); };
