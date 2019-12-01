@@ -3,30 +3,45 @@ const mysql = require("mysql");
 var PSWD = process.env.MYSQL_PSWD;
 var connection = mysql.createConnection({
   host: "localhost",
-
-  // Your port; if not 3306
   port: 3306,
-
-  // Your username
   user: "root",
-
-  // Your password
   password: PSWD,
   database: "employeemanagement"
 });
 
-function simpleSelect(tab) {
-  console.log("view all departments");
-  connection.query("SELECT name AS department FROM ?",tab, function(err,results) {
+// function makeDb() {
+module.exports = () => {
+  return {
+    query (sql, args) {
+      return util.promisify( connection.query)
+        .call ( connection, sql, args);
+    },
+    close () {
+      return util.promisify( connection.end ).call(connection);
+    }
+  };
+}
+
+// module.exports = makeDb;
+
+/*
+async function simpleSelect(tab) {
+  console.log("view all departments",tab);
+  const query = `SELECT name AS department from ${tab};`;
+  console.log(query);
+  // connection.query('SELECT name AS department FROM ?', function(err,results) {
+  const stuff = await connection.query(query, function(err,results) {
     if (err) throw err;
+    console.log("result",results);
     return results; 
   });
-};
-
-module.exports = (one) => {
-  const stuff = [
-    simpleSelect(one)
-  ]
-
   return stuff;
 };
+
+async function init() {
+ const res = await simpleSelect("department");
+ console.log("res",res);
+}
+
+init();
+*/

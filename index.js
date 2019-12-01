@@ -1,14 +1,14 @@
 const inquirer = require("inquirer");
 
 const questMenu = require("./lib/menu");
-const questDept= require("./lib/department");
+const department = require("./lib/department");
 const questRole = require("./lib/roles");
 const questEmpl= require("./lib/employee");
 
 const test = true;
 
 async function init() {
-  // if (test) console.log("started init:");
+  if (test) console.log("started init:");
   // will need to wrap this in a loop for n-employees
   try {
     questMenu().then( function(ansOptions){
@@ -18,7 +18,8 @@ async function init() {
       switch (ansOptions.mainMenu) {
         case 'Manage departments':
           console.log("case md");
-          questDept().then( function(){ init();} );
+          // questDept().then( function(){ init();} );
+          department.getDept().then( function(){ init();} );
           break;
         case 'Manage roles':
           console.log("case mr");
@@ -27,7 +28,7 @@ async function init() {
           break;
         case 'Manage employees':
           console.log("case me");
-          questEmpl().then( function(){ init(); });
+          // questEmpl().then( function(){ init(); });
           break;
         default:
           console.log("Thank you for using Employee Management Tool.");
