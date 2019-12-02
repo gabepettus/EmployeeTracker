@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const util = require("util");
 
 var PSWD = process.env.MYSQL_PSWD;
 var connection = mysql.createConnection({
@@ -6,11 +7,10 @@ var connection = mysql.createConnection({
   port: 3306,
   user: "root",
   password: PSWD,
-  database: "employeemanagement"
+  database: "emplmang"
 });
 
-// function makeDb() {
-module.exports = () => {
+function makeDb() {
   return {
     query (sql, args) {
       return util.promisify( connection.query)
@@ -22,8 +22,7 @@ module.exports = () => {
   };
 }
 
-// module.exports = makeDb;
-
+module.exports = () => { return makeDb; };
 /*
 async function simpleSelect(tab) {
   console.log("view all departments",tab);
