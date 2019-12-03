@@ -19,7 +19,8 @@ async function init() {
         case 'Manage departments':
           console.log("case md");
           // questDept().then( function(){ init();} );
-          department.getDept().then( function(){ init();} );
+          // department.getDept().then( function(){ init();} );
+          department.getDept();
           break;
         case 'Manage roles':
           console.log("case mr");
@@ -41,3 +42,5 @@ async function init() {
 }
 
 init();
+
+exports.init = init;
