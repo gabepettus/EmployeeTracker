@@ -1,5 +1,8 @@
 const mysql = require("mysql");
 const util = require("util");
+//account number:
+// 385421924
+//1/10/2016
 
 var PSWD = process.env.MYSQL_PSWD;
 var connection = mysql.createConnection({
@@ -11,18 +14,21 @@ var connection = mysql.createConnection({
 });
 
 function makeDb() {
+  // console.log("here");
   return {
-    query (sql, args) {
+    query(sql, args) {
       return util.promisify( connection.query)
         .call ( connection, sql, args);
     },
-    close () {
+    close() {
+      console.log("closing");
       return util.promisify( connection.end ).call(connection);
     }
   };
-}
+};
 
-module.exports = () => { return makeDb; };
+module.exports =  makeDb();
+
 /*
 async function simpleSelect(tab) {
   console.log("view all departments",tab);

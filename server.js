@@ -2,8 +2,10 @@ const inquirer = require("inquirer");
 
 const questMenu = require("./lib/menu");
 const department = require("./lib/department");
-const questRole = require("./lib/roles");
-const questEmpl= require("./lib/employee");
+const roles = require("./lib/roles");
+const employee= require("./lib/employee");
+
+const db = require("./db/db");
 
 const test = true;
 
@@ -13,26 +15,21 @@ async function init() {
   try {
     questMenu().then( function(ansOptions){
 
-      if (test) { console.log("answers:",ansOptions); }
+      // if (test) { console.log("answers:",ansOptions); }
 
       switch (ansOptions.mainMenu) {
         case 'Manage departments':
-          console.log("case md");
-          // questDept().then( function(){ init();} );
-          // department.getDept().then( function(){ init();} );
-          department.getDept();
+          department.genDept();
           break;
         case 'Manage roles':
-          console.log("case mr");
-          // questRole().then( function(){ init();} );
-          // questRole();
+          roles.genRole();
           break;
         case 'Manage employees':
-          console.log("case me");
-          // questEmpl().then( function(){ init(); });
+          employee.genEmpl();
           break;
         default:
           console.log("Thank you for using Employee Management Tool.");
+          db.close();
           break;
       }
     });
